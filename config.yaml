@@ -1,7 +1,7 @@
-name: "Hello world"
-description: "My first real add-on!"
-version: "0.0.2"
-slug: "hello_world"
+name: "HA X-Ray core"
+description: "Homeassistant X-Ray core container"
+version: "0.0.3"
+slug: "ha_xray_core"
 init: false
 arch:
   - aarch64
