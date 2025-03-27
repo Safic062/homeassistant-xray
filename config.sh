@@ -40,7 +40,7 @@ EOF
 
 echo "bridges: $(bashio::config 'bridges')"
 
-for index in $(bashio::config 'bridges|keys'); do
+for index in $(bashio::config 'bridges'); do
   echo "bridge: $index"
 #while bashio::config "bridges.${index}.domain" > /dev/null; do
 #   bashio::config.require.domain "bridges[${bridge}].domain"
