@@ -11,7 +11,34 @@ cat <<EOF > /etc/xray/config.json
 EOF
 
 # Перебор всех элементов массива bridges
-index=0
+
+# for login in $(bashio::config 'logins|keys'); do
+#   bashio::config.require.username "logins[${login}].username"
+#   bashio::config.require.password "logins[${login}].password"
+
+#   username=$(bashio::config "logins[${login}].username")
+#   password=$(bashio::config "logins[${login}].password")
+
+#-----
+
+# # Пример массива строк
+# arr=("apple" "banana" "cherry" "date")
+
+# # Переменная для хранения итоговой строки
+# result=""
+
+# # Обход массива и добавление элементов в строку
+# for item in "${arr[@]}"; do
+#     if [ -n "$result" ]; then
+#         result="$result,$item"
+#     else
+#         result="$item"
+#     fi
+# done
+
+# echo "Результат: $result"
+
+
 while bashio::config "bridges.${index}.domain" > /dev/null; do
   DOMAIN=$(bashio::config "bridges.${index}.domain")
   LOCAL=$(bashio::config "bridges.${index}.local")
