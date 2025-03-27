@@ -40,13 +40,13 @@ EOF
 
 for bridge in $(bashio::config 'bridges|keys'); do
 #while bashio::config "bridges.${index}.domain" > /dev/null; do
-  bashio::config.require.domain "bridges[${bridge}].domain"
-  bashio::config.require.local "bridges[${bridge}].local"
-  bashio::config.require.portal_address "bridges[${bridge}].portal_address"
-  bashio::config.require.portal_port "bridges[${bridge}].portal_port"
-  bashio::config.require.portal_user_id "bridges[${bridge}].portal_user_id"
-  bashio::config.require.in_tag "bridges[${bridge}].in_tag"
-  bashio::config.require.out_tag "bridges[${bridge}].out_tag"
+#   bashio::config.require.domain "bridges[${bridge}].domain"
+#   bashio::config.require.local "bridges[${bridge}].local"
+#   bashio::config.require.portal_address "bridges[${bridge}].portal_address"
+#   bashio::config.require.portal_port "bridges[${bridge}].portal_port"
+#   bashio::config.require.portal_user_id "bridges[${bridge}].portal_user_id"
+#   bashio::config.require.in_tag "bridges[${bridge}].in_tag"
+#   bashio::config.require.out_tag "bridges[${bridge}].out_tag"
 
   DOMAIN=$(bashio::config "bridges.${bridge}.domain")
   LOCAL=$(bashio::config "bridges.${bridge}.local")
