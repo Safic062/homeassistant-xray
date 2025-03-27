@@ -1,6 +1,6 @@
 name: "HA X-Ray core"
 description: "Homeassistant X-Ray core container"
-version: "0.0.21"
+version: "0.0.22"
 slug: "ha_xray_core"
 init: false
 arch:
