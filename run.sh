@@ -3,6 +3,6 @@
 echo "Hello world!"
 echo "option beer \"${BEER}\";"
 echo "option wine \"${WINE}\";"
-echo "option liquor \"${LICOUR}\";"
+echo "option liquor \"${LIQOUR}\";"
 echo "option name \"${NAME}\";"
 echo "option year \"${YEAR}\";"
