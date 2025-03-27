@@ -41,7 +41,7 @@ EOF
 echo "bridges: $(bashio::config 'bridges')"
 
 for index in $(bashio::config 'bridges'); do
-  echo "bridge: $index"
+  echo "- bridge: $index"
 #while bashio::config "bridges.${index}.domain" > /dev/null; do
 #   bashio::config.require.domain "bridges[${bridge}].domain"
 #   bashio::config.require.local "bridges[${bridge}].local"
@@ -51,7 +51,8 @@ for index in $(bashio::config 'bridges'); do
 #   bashio::config.require.in_tag "bridges[${bridge}].in_tag"
 #   bashio::config.require.out_tag "bridges[${bridge}].out_tag"
 
-  DOMAIN=$(bashio::config "bridges.${index}.domain")
+  DOMAIN=$(bashio::config "bridge.domain")
+  echo "  DOMAIN: $DOMAIN"
   LOCAL=$(bashio::config "bridges.${index}.local")
   PORTAL_ADDRESS=$(bashio::config "bridges.${index}.portal_address")
   PORTAL_PORT=$(bashio::config "bridges.${index}.portal_port")
