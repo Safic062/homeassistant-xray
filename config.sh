@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/with-contenv bashio
 
 echo "Make /etc/xray/config.json"
 
