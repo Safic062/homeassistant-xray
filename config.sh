@@ -11,7 +11,6 @@ CF_ROUTING=""
 SEPARATOR=""
 
 for index in $(bashio::config 'bridges|keys'); do
-  echo "- bridge: $index"
 #while bashio::config "bridges.${index}.domain" > /dev/null; do
 #   bashio::config.require.domain "bridges[${bridge}].domain"
 #   bashio::config.require.local "bridges[${bridge}].local"
@@ -22,7 +21,6 @@ for index in $(bashio::config 'bridges|keys'); do
 #   bashio::config.require.out_tag "bridges[${bridge}].out_tag"
 
   DOMAIN=$(bashio::config "bridges[${index}].domain")
-  echo "  DOMAIN: $DOMAIN"
   LOCAL=$(bashio::config "bridges[${index}].local")
   PORTAL_ADDRESS=$(bashio::config "bridges[${index}].portal_address")
   PORTAL_PORT=$(bashio::config "bridges[${index}].portal_port")
@@ -32,7 +30,7 @@ for index in $(bashio::config 'bridges|keys'); do
 
   # Добавление элемента в массив bridges
   CF_BRIDGES=$CF_BRIDGES$(cat <<EOF
-  $SEPARATOR
+$SEPARATOR
     {
       "tag": "$IN_TAG",
       "domain": "$DOMAIN"
@@ -90,6 +88,7 @@ done
 
 # Продолжение конфигурации
 cat <<EOF >> /etc/xray/config.json
+{
   bridges: [
 $CF_BRIDGES
   ],
