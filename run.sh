@@ -2,6 +2,4 @@
 
 echo "Hello X-Ray!"
 
-/usr/bin/xray -config /etc/xray/config.json
-
-echo "---"
+/usr/bin/xray --config /etc/xray/config.json
