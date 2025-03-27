@@ -31,10 +31,10 @@ for index in $(bashio::config 'bridges|keys'); do
   # Добавление элемента в массив bridges
   CF_BRIDGES=$CF_BRIDGES$(cat <<EOF
 $SEPARATOR
-    {
-      "tag": "$IN_TAG",
-      "domain": "$DOMAIN"
-    }
+      {
+        "tag": "$IN_TAG",
+        "domain": "$DOMAIN"
+      }
 EOF
 )
 
@@ -89,14 +89,16 @@ done
 # Продолжение конфигурации
 cat <<EOF >> /etc/xray/config.json
 {
-  bridges: [
+  "reverse": {
+    "bridges": [
 $CF_BRIDGES
-  ],
-  "outbound": [
+    ],
+  }
+  "outbounds": [
 $CF_OUTBOUNDS
   ],
-  routing: {
-    rules: [
+  "routing": {
+    "rules": [
 $CF_ROUTING
     ]
   }
