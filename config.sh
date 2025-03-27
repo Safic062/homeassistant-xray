@@ -40,6 +40,11 @@ EOF
 
 echo "bridges: $(bashio::config 'bridges')"
 
+CF_BRIDGES=""
+CF_OUTBOUNDS=""
+CF_ROUTING=""
+SEPARATOR=""
+
 for index in $(bashio::config 'bridges|keys'); do
   echo "- bridge: $index"
 #while bashio::config "bridges.${index}.domain" > /dev/null; do
@@ -61,20 +66,29 @@ for index in $(bashio::config 'bridges|keys'); do
   OUT_TAG=$(bashio::config "bridges[${index}].out_tag")
 
   # Добавление элемента в массив bridges
-  cat <<EOF >> /etc/xray/config.json
+  CF_BRIDGES=$CF_BRIDGES$(cat <<EOF
     {
       "tag": "$IN_TAG",
       "domain": "$DOMAIN"
-    }
+    }$SEPARATOR
 EOF
+)
+#   cat <<EOF >> /etc/xray/config.json
+#     {
+#       "tag": "$IN_TAG",
+#       "domain": "$DOMAIN"
+#     }$
+# EOF
 
 #   index=$((index + 1))
-#   next_comma=","
+  SEPARATOR=","
 done
 
-# # Продолжение конфигурации
-# cat <<EOF >> /etc/xray/config.json
-#   ],
+# Продолжение конфигурации
+cat <<EOF >> /etc/xray/config.json
+  bridges: [
+$CF_BRIDGES
+  ]
 #   "outbound": [
 #     {
 #       "tag": "$OUT_TAG",
@@ -116,8 +130,8 @@ done
 #       }
 #     ]
 #   }
-# }
-# EOF
+}
+EOF
 
 echo "Конфигурация успешно сгенерирована: /etc/xray/config.json"
 
