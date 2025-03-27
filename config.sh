@@ -2,8 +2,6 @@
 
 echo "Make config.json"
 
-#!/bin/bash
-
 # Генерация конфигурации
 cat <<EOF > config.json
 {
