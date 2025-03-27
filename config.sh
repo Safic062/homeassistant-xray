@@ -32,14 +32,16 @@ for index in $(bashio::config 'bridges|keys'); do
 
   # Добавление элемента в массив bridges
   CF_BRIDGES=$CF_BRIDGES$(cat <<EOF
+  $SEPARATOR
     {
       "tag": "$IN_TAG",
       "domain": "$DOMAIN"
-    }$SEPARATOR
+    }
 EOF
 )
 
   CF_OUTBOUNDS=$CF_OUTBOUNDS$(cat <<EOF
+$SEPARATOR
     {
       "tag": "$OUT_TAG",
       "protocol": "freedom",
@@ -63,11 +65,12 @@ EOF
         ]
       },
       "tag": "interconn"
-    }$SEPARATOR
+    }
 EOF
 )
 
   CF_ROUTING=$CF_ROUTING$(cat <<EOF
+$SEPARATOR
       {
         "type": "field",
         "inboundTag": ["$IN_TAG"],
@@ -78,7 +81,7 @@ EOF
         "type": "field",
         "inboundTag": ["$IN_TAG"],
         "outboundTag": "$OUT_TAG"
-      }$SEPARATOR
+      }
 EOF
 )
 
