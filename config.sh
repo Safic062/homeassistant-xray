@@ -88,8 +88,17 @@ done
 cat <<EOF >> /etc/xray/config.json
   bridges: [
 $CF_BRIDGES
-  ]
-#   "outbound": [
+  ],
+  "outbound": [
+$CF_OUTBOUNDS
+  ],
+  routing: {
+    rules: [
+$CF_ROUTING
+    ]
+  }
+}
+EOF
 #     {
 #       "tag": "$OUT_TAG",
 #       "protocol": "freedom",
@@ -130,8 +139,6 @@ $CF_BRIDGES
 #       }
 #     ]
 #   }
-}
-EOF
 
 echo "Конфигурация успешно сгенерирована: /etc/xray/config.json"
 
