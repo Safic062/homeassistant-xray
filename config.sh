@@ -5,41 +5,6 @@ echo "Make /etc/xray/config.json"
 rm /etc/xray/config.json
 
 # Генерация конфигурации
-cat <<EOF > /etc/xray/config.json
-{
-  "bridges": [
-EOF
-
-# Перебор всех элементов массива bridges
-
-# for login in $(bashio::config 'logins|keys'); do
-#   bashio::config.require.username "logins[${login}].username"
-#   bashio::config.require.password "logins[${login}].password"
-
-#   username=$(bashio::config "logins[${login}].username")
-#   password=$(bashio::config "logins[${login}].password")
-
-#-----
-
-# # Пример массива строк
-# arr=("apple" "banana" "cherry" "date")
-
-# # Переменная для хранения итоговой строки
-# result=""
-
-# # Обход массива и добавление элементов в строку
-# for item in "${arr[@]}"; do
-#     if [ -n "$result" ]; then
-#         result="$result,$item"
-#     else
-#         result="$item"
-#     fi
-# done
-
-# echo "Результат: $result"
-
-echo "bridges: $(bashio::config 'bridges')"
-
 CF_BRIDGES=""
 CF_OUTBOUNDS=""
 CF_ROUTING=""
@@ -73,14 +38,50 @@ for index in $(bashio::config 'bridges|keys'); do
     }$SEPARATOR
 EOF
 )
-#   cat <<EOF >> /etc/xray/config.json
-#     {
-#       "tag": "$IN_TAG",
-#       "domain": "$DOMAIN"
-#     }$
-# EOF
 
-#   index=$((index + 1))
+  CF_OUTBOUNDS=$CF_OUTBOUNDS$(cat <<EOF
+    {
+      "tag": "$OUT_TAG",
+      "protocol": "freedom",
+      "settings": {
+        "redirect": "$LOCAL"
+      }
+    },
+    {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "$PORTAL_ADDRESS",
+            "port": $PORTAL_PORT,
+            "users": [
+              {
+                "id": "$PORTAL_USER_ID"
+              }
+            ]
+          }
+        ]
+      },
+      "tag": "interconn"
+    }$SEPARATOR
+EOF
+)
+
+  CF_ROUTING=$CF_ROUTING$(cat <<EOF
+      {
+        "type": "field",
+        "inboundTag": ["$IN_TAG"],
+        "domain": ["full:$DOMAIN"],
+        "outboundTag": "interconn"
+      },
+      {
+        "type": "field",
+        "inboundTag": ["$IN_TAG"],
+        "outboundTag": "$OUT_TAG"
+      }$SEPARATOR
+EOF
+)
+
   SEPARATOR=","
 done
 
@@ -99,46 +100,6 @@ $CF_ROUTING
   }
 }
 EOF
-#     {
-#       "tag": "$OUT_TAG",
-#       "protocol": "freedom",
-#       "settings": {
-#         "redirect": "$LOCAL"
-#       }
-#     },
-#     {
-#       "protocol": "vmess",
-#       "settings": {
-#         "vnext": [
-#           {
-#             "address": "$PORTAL_ADDRESS",
-#             "port": $PORTAL_PORT,
-#             "users": [
-#               {
-#                 "id": "$PORTAL_USER_ID"
-#               }
-#             ]
-#           }
-#         ]
-#       },
-#       "tag": "interconn"
-#     }
-#   ],
-#   "routing": {
-#     "rules": [
-#       {
-#         "type": "field",
-#         "inboundTag": ["$IN_TAG"],
-#         "domain": ["full:$DOMAIN"],
-#         "outboundTag": "interconn"
-#       },
-#       {
-#         "type": "field",
-#         "inboundTag": ["$IN_TAG"],
-#         "outboundTag": "$OUT_TAG"
-#       }
-#     ]
-#   }
 
 echo "Конфигурация успешно сгенерирована: /etc/xray/config.json"
 
