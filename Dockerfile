@@ -18,6 +18,6 @@ RUN set -ex \
 
 VOLUME /etc/xray
 ENV TZ=Asia/Shanghai
-CMD [ "/usr/bin/xray", "-config", "/etc/xray/config.json" ]
+# CMD [ "/usr/bin/xray", "-config", "/etc/xray/config.json" ]
 
-# CMD [ "/run.sh" ]
+CMD [ "/run.sh" ]
