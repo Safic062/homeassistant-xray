@@ -5,6 +5,7 @@ WORKDIR /root
 COPY xray.sh /root/xray.sh
 COPY config.sh /root/config.sh
 COPY run.sh /
+RUN chmod a+x /config.sh
 RUN chmod a+x /run.sh
 
 RUN set -ex \
