@@ -38,10 +38,10 @@ EOF
 
 # echo "Результат: $result"
 
-echo "bridge: $(bashio::config 'bridges')"
+echo "bridges: $(bashio::config 'bridges')"
 
 for index in $(bashio::config 'bridges|keys'); do
-  echo "bridge: $bridge"
+  echo "bridge: $index"
 #while bashio::config "bridges.${index}.domain" > /dev/null; do
 #   bashio::config.require.domain "bridges[${bridge}].domain"
 #   bashio::config.require.local "bridges[${bridge}].local"
@@ -51,13 +51,13 @@ for index in $(bashio::config 'bridges|keys'); do
 #   bashio::config.require.in_tag "bridges[${bridge}].in_tag"
 #   bashio::config.require.out_tag "bridges[${bridge}].out_tag"
 
-  DOMAIN=$(bashio::config "bridges.${bridge}.domain")
-  LOCAL=$(bashio::config "bridges.${bridge}.local")
-  PORTAL_ADDRESS=$(bashio::config "bridges.${bridge}.portal_address")
-  PORTAL_PORT=$(bashio::config "bridges.${bridge}.portal_port")
-  PORTAL_USER_ID=$(bashio::config "bridges.${bridge}.portal_user_id")
-  IN_TAG=$(bashio::config "bridges.${bridge}.in_tag")
-  OUT_TAG=$(bashio::config "bridges.${bridge}.out_tag")
+  DOMAIN=$(bashio::config "bridges.${index}.domain")
+  LOCAL=$(bashio::config "bridges.${index}.local")
+  PORTAL_ADDRESS=$(bashio::config "bridges.${index}.portal_address")
+  PORTAL_PORT=$(bashio::config "bridges.${index}.portal_port")
+  PORTAL_USER_ID=$(bashio::config "bridges.${index}.portal_user_id")
+  IN_TAG=$(bashio::config "bridges.${index}.in_tag")
+  OUT_TAG=$(bashio::config "bridges.${index}.out_tag")
 
   # Добавление элемента в массив bridges
   cat <<EOF >> /etc/xray/config.json
