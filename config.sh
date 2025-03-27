@@ -1,11 +1,11 @@
 #!/bin/sh
 
-echo "Make config.json"
+echo "Make /etc/xray/config.json"
 
-rm config.sh
+rm /etc/xray/config.json
 
 # Генерация конфигурации
-cat <<EOF > config.json
+cat <<EOF > /etc/xray/config.json
 {
   "bridges": [
 EOF
@@ -22,7 +22,7 @@ while bashio::config "bridges.${index}.domain" > /dev/null; do
   OUT_TAG=$(bashio::config "bridges.${index}.out_tag")
 
   # Добавление элемента в массив bridges
-  cat <<EOF >> config.json
+  cat <<EOF >> /etc/xray/config.json
     {
       "tag": "$IN_TAG",
       "domain": "$DOMAIN"
@@ -34,7 +34,7 @@ EOF
 done
 
 # Продолжение конфигурации
-cat <<EOF >> config.json
+cat <<EOF >> /etc/xray/config.json
   ],
   "outbound": [
     {
@@ -80,8 +80,8 @@ cat <<EOF >> config.json
 }
 EOF
 
-echo "Конфигурация успешно сгенерирована: config.json"
+echo "Конфигурация успешно сгенерирована: /etc/xray/config.json"
 
-cat config.json
+cat /etc/xray/config.json
 
 echo "-------"
