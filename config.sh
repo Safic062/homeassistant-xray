@@ -92,8 +92,8 @@ cat <<EOF >> /etc/xray/config.json
   "reverse": {
     "bridges": [
 $CF_BRIDGES
-    ],
-  }
+    ]
+  },
   "outbounds": [
 $CF_OUTBOUNDS
   ],
