@@ -2,7 +2,7 @@
 
 echo "Make /etc/xray/config.json"
 
-rm /etc/xray/config.json
+rm /etc/xray/config.json || true
 
 # Генерация конфигурации
 CF_BRIDGES=""
