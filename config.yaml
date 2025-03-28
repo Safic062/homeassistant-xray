@@ -1,6 +1,6 @@
 name: "X-Ray core reverse proxy"
 description: "X-Ray core reverse proxy container"
-version: "0.0.50"
+version: "0.0.51"
 slug: "ha_xray_core"
 init: false
 arch:
