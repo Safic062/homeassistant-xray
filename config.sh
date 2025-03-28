@@ -2,7 +2,7 @@
 
 echo "creating /etc/xray/config.json"
 
-rm /etc/xray/config.json || true
+# rm /etc/xray/config.json || true
 
 CF_BRIDGES=""
 CF_OUTBOUNDS=""
