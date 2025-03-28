@@ -1,10 +1,9 @@
 #!/usr/bin/with-contenv bashio
 
-echo "Make /etc/xray/config.json"
+echo "creating /etc/xray/config.json"
 
 rm /etc/xray/config.json || true
 
-# Генерация конфигурации
 CF_BRIDGES=""
 CF_OUTBOUNDS=""
 CF_ROUTING=""
@@ -29,7 +28,6 @@ for index in $(bashio::config 'bridges|keys'); do
   OUT_TAG=$(bashio::config "bridges[${index}].out_tag")
   CONN_TAG=$(bashio::config "bridges[${index}].conn_tag")
 
-  # Добавление элемента в массив bridges
   CF_BRIDGES=$CF_BRIDGES$(cat <<EOF
 $SEPARATOR
       {
@@ -87,7 +85,6 @@ EOF
   SEPARATOR=","
 done
 
-# Продолжение конфигурации
 cat <<EOF >> /etc/xray/config.json
 {
   "reverse": {
@@ -106,7 +103,7 @@ $CF_ROUTING
 }
 EOF
 
-echo "Конфигурация успешно сгенерирована: /etc/xray/config.json"
+echo "configuration created: /etc/xray/config.json"
 
 cat /etc/xray/config.json
 
