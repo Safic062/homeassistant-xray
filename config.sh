@@ -27,6 +27,7 @@ for index in $(bashio::config 'bridges|keys'); do
   PORTAL_USER_ID=$(bashio::config "bridges[${index}].portal_user_id")
   IN_TAG=$(bashio::config "bridges[${index}].in_tag")
   OUT_TAG=$(bashio::config "bridges[${index}].out_tag")
+  CONN_TAG=$(bashio::config "bridges[${index}].conn_tag")
 
   # Добавление элемента в массив bridges
   CF_BRIDGES=$CF_BRIDGES$(cat <<EOF
@@ -62,7 +63,7 @@ $SEPARATOR
           }
         ]
       },
-      "tag": "interconn"
+      "tag": "$CONN_TAG"
     }
 EOF
 )
@@ -73,7 +74,7 @@ $SEPARATOR
         "type": "field",
         "inboundTag": ["$IN_TAG"],
         "domain": ["full:$DOMAIN"],
-        "outboundTag": "interconn"
+        "outboundTag": "$CONN_TAG"
       },
       {
         "type": "field",

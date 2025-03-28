@@ -1,6 +1,6 @@
 name: "HA X-Ray core"
 description: "Homeassistant X-Ray core container"
-version: "0.0.47"
+version: "0.0.48"
 slug: "ha_xray_core"
 init: false
 arch:
@@ -16,8 +16,9 @@ options:
       portal_address: "portal's IP address"
       portal_port: 1234
       portal_user_id: "5783a3e7-e373-51cd-8642-c83782b807c5"
-      in_tag: in_bridge
-      out_tag: out_bridge
+      in_tag: bridge_in
+      out_tag: bridge_out
+      conn_tag: bridge_conn
 schema:
   bridges:
     - domain: str
@@ -27,3 +28,4 @@ schema:
       portal_user_id: str
       in_tag: str
       out_tag: str
+      conn_tag: str
