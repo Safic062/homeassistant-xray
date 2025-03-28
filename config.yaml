@@ -1,5 +1,5 @@
 name: "X-Ray core reverse proxy"
-description: "Homeassistant X-Ray core reverse proxy container"
+description: "X-Ray core reverse proxy container"
 version: "0.0.49"
 slug: "ha_xray_core"
 init: false

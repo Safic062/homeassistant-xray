@@ -1,7 +1,6 @@
 # X-Ray core reverse proxy
-## Homeassistant X-Ray core reverse proxy container
 
-Runs X-Ray core at your Homeassistant host
+Runs X-Ray core reverse proxy container on your Homeassistant host
 
 Guide: https://xtls.github.io/en/config/reverse.html
 
